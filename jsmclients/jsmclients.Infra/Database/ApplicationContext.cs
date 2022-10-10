@@ -24,8 +24,8 @@ namespace jsmclients.Infra.Database
 
 /*
 - Comando para criar o arquivo Migrations:
-dotnet ef --startup-project ./jsmclients.API/jsmclients.API.csproj  migrations add Tables -p ./jsmclients.Infra/jsmclients.Infra.csproj
+dotnet ef --startup-project ./jsmclients.API/jsmclients.API.csproj  migrations add ClientRegistries -p ./jsmclients.Infra/jsmclients.Infra.csproj
 
 - Comando para criar as tabelas no SQL (enquanto o update automático está desabilitado):
-dotnet ef database update --project ./jsmclients.Infra
+dotnet ef database update --project ./jsmclients.API
  */

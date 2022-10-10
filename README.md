@@ -20,19 +20,19 @@ Procura e retorna uma lista de elegíveis de acordo com o tipo e a região infor
 
 ## Regras de Negócio
 
-1. Clientes classificados de acordo com as cinco regiões do país.
+1. Clientes classificados de acordo com as cinco regiões do país na saída de dados (identificado pelo estado).
 
 2. Clientes rotulados como `special`, `normal` ou `laborious` de acordo com coordenadas informadas.
 
 3. Adaptação dos contatos telefônicos para o formato `E.164`.
 
-4. Nacionalidade padrão: BR.
+4. Nacionalidade padrão: `BR`.
 
 5. Gênero formatado para um único caracter, `f` ou `m`.
 
 6. Campo `age` removido.
 
-7. Estrutura formatada conforme Output abaixo:
+7. Estrutura formatada conforme Output abaixo (retirado do [code-challenge](https://github.com/juntossomosmais/code-challenge)):
 
 ```json
 {
@@ -79,7 +79,7 @@ Procura e retorna uma lista de elegíveis de acordo com o tipo e a região infor
 
 ## Ferramentas
 
-- .NET 5
+- ASP.NET Core 5.0
 - SQLite
-- EFCore
+- Entity Framework Core
 - Swagger

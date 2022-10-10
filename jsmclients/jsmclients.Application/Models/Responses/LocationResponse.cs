@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jsmclients.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace jsmclients.Application.Models.Responses
 {
     public class LocationResponse
     {
-        public string Region { get; set; }
+        public ClientRegionEnum Region { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }

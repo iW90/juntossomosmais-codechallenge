@@ -9,7 +9,7 @@ using jsmclients.Infra.Database;
 namespace jsmclients.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221009210455_ClientRegistries")]
+    [Migration("20221010173550_ClientRegistries")]
     partial class ClientRegistries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

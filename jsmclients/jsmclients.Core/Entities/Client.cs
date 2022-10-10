@@ -1,7 +1,5 @@
 ﻿using jsmclients.Core.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace jsmclients.Core.Entities
 {
@@ -23,6 +21,42 @@ namespace jsmclients.Core.Entities
         public int IdLocation { get; set; }
         public Pictures Pictures { get; set; }
         public int IdPicture { get; set; }
+
+        public string GetType(string longitude, string latitude)
+        {
+            #region Limits
+            //Special
+            decimal minlon1 = -02.196998m;
+            decimal minlat1 = -46.361899m;
+            decimal maxlon1 = -15.411580m;
+            decimal maxlat1 = -34.276938m;
+
+            decimal minlon2 = -19.766959m;
+            decimal minlat2 = -52.997614m;
+            decimal maxlon2 = -23.966413m;
+            decimal maxlat2 = -44.428305m;
+
+            //Normal
+            decimal minlon = -26.155681m;
+            decimal minlat = -54.777426m;
+            decimal maxlon = -34.016466m;
+            decimal maxlat = -46.603598m;
+            #endregion
+
+            decimal.TryParse(longitude, out var lon);
+            decimal.TryParse(latitude, out var lat);
+
+            if ((lat >= minlat1 && lat <= maxlat1 &&
+                lon >= minlon1 && lon <= maxlon1) ||
+                (lat >= minlat2 && lat <= maxlat2 &&
+                lon >= minlon2 && lon <= maxlon2))
+                return "special";
+            else if (lat >= minlat && lat <= maxlat &&
+                lon >= minlon && lon <= maxlon)
+                return "normal";
+            else
+                return "laborious";
+        }
 
         public string GetRegion(string state)
         {
@@ -62,43 +96,7 @@ namespace jsmclients.Core.Entities
                     return "sudeste";
                 default:
                     return "outro";
-            }    
-        }
-
-        public string GetType(string longitude, string latitude)
-        {
-            #region Limits
-            //Special
-            decimal minlon1 = -02.196998m;
-            decimal minlat1 = -46.361899m;
-            decimal maxlon1 = -15.411580m;
-            decimal maxlat1 = -34.276938m;
-
-            decimal minlon2 = -19.766959m;
-            decimal minlat2 = -52.997614m;
-            decimal maxlon2 = -23.966413m;
-            decimal maxlat2 = -44.428305m;
-
-            //Normal
-            decimal minlon = -26.155681m;
-            decimal minlat = -54.777426m;
-            decimal maxlon = -34.016466m;
-            decimal maxlat = -46.603598m;
-            #endregion
-
-            decimal.TryParse(longitude, out var lon);
-            decimal.TryParse(latitude, out var lat);
-
-            if ((lat >= minlat1 && lat <= maxlat1 &&
-                lon >= minlon1 && lon <= maxlon1) ||
-                (lat >= minlat2 && lat <= maxlat2 &&
-                lon >= minlon2 && lon <= maxlon2))
-                return "special";
-            else if (lat >= minlat && lat <= maxlat &&
-                lon >= minlon && lon <= maxlon)
-                return "normal";
-            else
-                return "laborious";
+            }
         }
     }
 }

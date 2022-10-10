@@ -15,15 +15,15 @@ namespace jsmclients.Infra.Migrations
 
         }
 
+
+        //Regras de Negócio
         public char SetGender(string gender)
         {
-            //Get first character, (f or m)
             return gender[0];
         }
 
         public string SetPhoneNumber(string number)
         {
-            //"(86) 8370-9831" to "+558683709831" (only BR)
             number = new string((from c in number where char.IsDigit(c) select c).ToArray());
             number = "+55" + number;
 

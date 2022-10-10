@@ -10,7 +10,6 @@ namespace jsmclients.API.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        //desacomplamento de código
         private readonly IUseCaseAsync<ElegibleListRequest, IActionResult> _elegibleListAsync;
 
         public ClientController(
@@ -19,8 +18,6 @@ namespace jsmclients.API.Controllers
             _elegibleListAsync = elegibleListAsync;
         }
 
-        //Requisições HTTP
-        //Get Elegibles List
         [HttpGet("ElegibleList")]
         public async Task<IActionResult> Get([FromQuery] ElegibleListRequest request)
         {

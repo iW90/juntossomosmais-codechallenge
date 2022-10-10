@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using jsmclients.Core.Enums;
+using System.Collections.Generic;
 
 namespace jsmclients.Application.Models.Responses
 {
     public class ClientResponse
     {
-        public string Type { get; set; }
+        public ClientTypeEnum Type { get; set; }
         public string Gender { get; set; }
         public NameResponse Name { get; set; }
         public LocationResponse Location { get; set; }

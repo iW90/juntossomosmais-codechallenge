@@ -32,26 +32,20 @@ namespace jsmclients.Application.UseCases
 
             var clients = await _repository.ElegibleList(request.Region, request.Type);
 
+            /*
             var response = _mapper.Map<List<ClientResponse>>(clients);
 
             return new OkObjectResult(response);
-        }
 
-
-    }
-}
-
-
-/*
-var response = _mapper.Map<List<ClientResponse>>(new List<Client>() 
-            { 
+             */
+            var response = _mapper.Map<List<ClientResponse>>(new List<Client>()
+            {
                 new Client()
                 {
                     Id = 1,
                     Gender = "F",
-                    Type = ClientTypeEnum.Special,
                     TitleName = "sra",
-                    FirstName = "Cleid",
+                    FirstName = "Cleidenilda",
                     LastName = "Silva",
                     Email = "abc@def.com",
                     DobDate = DateTime.Now,
@@ -62,13 +56,12 @@ var response = _mapper.Map<List<ClientResponse>>(new List<Client>()
                     Location = new Location()
                     {
                         Id = 1,
-                        Region = ClientRegionEnum.Sul,
                         Street = "abc",
                         City = "def",
-                        State = "amapá",
+                        State = "são paulo",
                         Postcode = 123,
-                        Latitude = "-69.8704M",
-                        Longitude = "-165.9545M",
+                        Latitude = "-02.196998",
+                        Longitude = "-46.361899",
                         TimezoneOffset = "+1:00",
                         TimezoneDescription = "Brussels, Copenhagen, Madrid, Paris"
                     },
@@ -80,4 +73,12 @@ var response = _mapper.Map<List<ClientResponse>>(new List<Client>()
                         Thumbnail = "asgasgas"
                     }
                 }
-            });*/
+            });
+
+            return new OkObjectResult(response);
+            
+        }
+
+
+    }
+}

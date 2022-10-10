@@ -12,14 +12,14 @@ namespace jsmclients.Infra.Database
 
             builder.HasKey(pk => pk.Id);
 
+            builder.Property(p => p.Gender)
+                .HasColumnType("CHAR(1)");
             builder.Property(p => p.TitleName)
                 .HasColumnType("VARCHAR(10)");
             builder.Property(p => p.FirstName)
                 .HasColumnType("VARCHAR(50)");
             builder.Property(p => p.LastName)
                 .HasColumnType("VARCHAR(50)");
-            builder.Property(p => p.Gender)
-                .HasColumnType("CHAR(1)");
             builder.Property(p => p.Email)
                 .HasColumnType("VARCHAR(100)");
             builder.Property(p => p.DobDate)

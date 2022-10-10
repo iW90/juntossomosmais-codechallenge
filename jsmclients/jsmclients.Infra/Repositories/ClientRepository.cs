@@ -29,7 +29,8 @@ namespace jsmclients.Infra.Repositories
                 .Include(x => x.Pictures)
                 .Where(x => x.Type == type)
                 .Where(x => x.Location.Region == region)
-                .AsNoTracking().ToListAsync();
+                .AsNoTracking()
+                .ToListAsync();
             /*
             return new List<Client>()
             {
@@ -37,7 +38,6 @@ namespace jsmclients.Infra.Repositories
                 {
                     Id = 1,
                     Gender = "F",
-                    Type = ClientTypeEnum.Special,
                     TitleName = "sra.",
                     FirstName = "Cleid",
                     LastName = "Silva",
@@ -50,7 +50,6 @@ namespace jsmclients.Infra.Repositories
                     Location = new Location()
                     {
                         Id = 1,
-                        Region = ClientRegionEnum.Sul,
                         Street = "abc",
                         City = "def",
                         State = "amapá",
@@ -68,7 +67,8 @@ namespace jsmclients.Infra.Repositories
                         Thumbnail = "asgasgas"
                     }
                 }
-            };*/
+            };
+            */
         }
     }
 }

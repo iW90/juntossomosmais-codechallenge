@@ -6,7 +6,6 @@ using jsmclients.Infra.Database;
 using jsmclients.Infra.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
+using System.Text.Json.Serialization;
 
 namespace jsmclients.API
 {
@@ -27,11 +26,8 @@ namespace jsmclients.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Injeção de Dependência: evita o alto nível de acoplamento de código dentro de uma aplicação.
-
             services.AddTransient<IClientRepository, ClientRepository>();
 
             services.AddTransient<IUseCaseAsync<ElegibleListRequest, IActionResult>, ElegibleListUseCase>();
@@ -48,9 +44,11 @@ namespace jsmclients.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "jsmclients.API", Version = "v1" });
             });
+
+            services.AddControllers().AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
         {
             if (env.IsDevelopment())
