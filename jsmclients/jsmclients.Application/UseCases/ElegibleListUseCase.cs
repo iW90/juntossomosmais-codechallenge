@@ -30,14 +30,15 @@ namespace jsmclients.Application.UseCases
             if (request == null)
                 return new BadRequestResult();
 
+            string coordinates = GetType(request.Region, request.Type);
+
             var clients = await _repository.ElegibleList(request.Region, request.Type);
 
-            /*
             var response = _mapper.Map<List<ClientResponse>>(clients);
 
             return new OkObjectResult(response);
 
-             */
+            /*
             var response = _mapper.Map<List<ClientResponse>>(new List<Client>()
             {
                 new Client()
@@ -74,6 +75,7 @@ namespace jsmclients.Application.UseCases
                     }
                 }
             });
+             */
 
             return new OkObjectResult(response);
             

@@ -21,4 +21,8 @@
     <ProjectReference Include="..\jsmclients.Core\jsmclients.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Files\" />
+  </ItemGroup>
+
 </Project>
