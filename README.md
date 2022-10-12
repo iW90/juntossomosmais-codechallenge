@@ -3,19 +3,13 @@
 A aplicação `jsmclients` foi desenvolvida para armazenar os pacotes de dados enviados e também permite a busca por clientes elegíveis.
 
 
-## Endpoints
+## Endpoint
 
 - `GET/api/Client/ElegibleList`
 
 Procura e retorna uma lista de elegíveis de acordo com o tipo e a região informadas:
 
-| Region | Type |
-|:---|:---|
-| `0`: norte | `0`: special |
-| `1`: nordeste | `1`: normal |
-| `2`: sul | `2`: laborious |
-| `3`: sudeste |
-| `4`: centro-oeste |
+
 
 
 ## Regras de Negócio

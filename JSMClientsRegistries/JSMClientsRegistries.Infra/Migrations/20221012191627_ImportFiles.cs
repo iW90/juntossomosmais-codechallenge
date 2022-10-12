@@ -1,10 +1,11 @@
-﻿using JSMClientsRegistries.Core.Entities;
+﻿using JSMClientsRegistries.Core.DTOs;
 using JSMClientsRegistries.Core.Enums;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System;
 
 namespace JSMClientsRegistries.Infra.Migrations
 {
@@ -17,37 +18,40 @@ namespace JSMClientsRegistries.Infra.Migrations
             foreach (var client in clientList)
             {
                 i++;
-                var type = GetType(client.Location.Latitude, client.Location.Longitude);
+                var type = GetType(client.Location.Coordinates.Latitude, client.Location.Coordinates.Longitude);
                 var region = GetRegion(client.Location.State);
                 var gender = FormatGender(client.Gender);
-                var phone = FormatPhoneNumber(client.Phone);
-                var cel = FormatPhoneNumber(client.Cel);
+                var phone = FormatNumberToE164(client.Phone);
+                var cel = FormatNumberToE164(client.Cel);
                 migrationBuilder.Sql($"INSERT INTO Pictures (Id, Large, Medium, Thumbnail) VALUES ('{i}', '{client.Pictures.Large}', '{client.Pictures.Medium}', '{client.Pictures.Thumbnail}');");
-                migrationBuilder.Sql($"INSERT INTO Location (Id, Region, Street, City, State, Postcode, Latitude, Longitude, TimezoneOffset, TimezoneDescription) VALUES ('{i}', '{region}', '{client.Location.Street}', '{client.Location.City}', '{client.Location.State}', '{client.Location.Postcode}', '{client.Location.Latitude}', '{client.Location.Longitude}', '{client.Location.TimezoneOffset}', '{client.Location.TimezoneDescription}');");
-                migrationBuilder.Sql($"INSERT INTO Clients (Id, Type, Gender, TitleName, FirstName, LastName, Email, DobDate, RegisteredDate, Phone, Cel, IdLocation, IdPictures) VALUES ('{i}', '{type}', '{gender}', '{client.TitleName}', '{client.FirstName}', '{client.LastName}', '{client.Email}', '{client.DobDate}', '{client.RegisteredDate}', '{phone}', '{cel}', '{i}', '{i}');");
+                migrationBuilder.Sql($"INSERT INTO Location (Id, Region, Street, City, State, Postcode, Latitude, Longitude, TimezoneOffset, TimezoneDescription) VALUES ('{i}', '{region}', '{client.Location.Street}', '{client.Location.City}', '{client.Location.State}', '{client.Location.Postcode}', '{client.Location.Coordinates.Latitude}', '{client.Location.Coordinates.Longitude}', '{client.Location.Timezone.Offset}', '{client.Location.Timezone.Description}');");
+                migrationBuilder.Sql($"INSERT INTO Clients (Id, Type, Gender, TitleName, FirstName, LastName, Email, DobDate, RegisteredDate, Phone, Cel, IdLocation, IdPictures) VALUES ('{i}', '{type}', '{gender}', '{client.Name.Title}', '{client.Name.First}', '{client.Name.Last}', '{client.Email}', '{client.Dob.Date}', '{client.Registered.Date}', '{phone}', '{cel}', '{i}', '{i}');");
             }
         }
 
-        //De JSON file
-        private List<Client> DeserializeClientListJson()
+        //Import JSON file
+        private List<ClientDTO> DeserializeClientListJson()
         {
-            List<Client> clients = null;
+            List<ClientDTO> clients = null;
 
             using (StreamReader stream = new StreamReader(@"..\Files\input-backend.json"))
             {
                 string jsonFile = stream.ReadToEnd();
-                clients = JsonSerializer.Deserialize<List<Client>>(jsonFile);
+                clients = JsonSerializer.Deserialize<List<ClientDTO>>(jsonFile);
             }
             return clients;
         }
 
-        
+        /*
         //Import CSV file
         private List<Client> DeserializeClientListCsv()
         {
             List<Client> clients = null;
+
             var reader = new StreamReader(File.OpenRead(@"..\Files\input-backend.csv"));
+
             List<string> clientList = new List<string>();
+
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
@@ -56,13 +60,12 @@ namespace JSMClientsRegistries.Infra.Migrations
                 clientList.Add(values[0]);
                 foreach (var column in clientList)
                 {
-                    
+                    Console.WriteLine(column);
                 }
             }
             return clients;
         }
-        
-
+        */
         //Methods
         private ClientTypeEnum GetType(string longitude, string latitude)
         {
@@ -146,7 +149,7 @@ namespace JSMClientsRegistries.Infra.Migrations
             return gender[0];
         }
 
-        private string FormatPhoneNumber(string number)
+        private string FormatNumberToE164(string number)
         {
             number = new string((from c in number where char.IsDigit(c) select c).ToArray());
             number = "+55" + number;
