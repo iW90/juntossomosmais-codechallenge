@@ -10,6 +10,11 @@ A aplicação `jsmclients` foi desenvolvida para armazenar os pacotes de dados e
 Procura e retorna uma lista de elegíveis de acordo com o tipo e a região informadas:
 
 
+## Upload de Arquivos JSON
+
+Upload automático para o banco de dados ao executar a API.
+
+> Funcionalidade "in memory" não implementada.
 
 
 ## Regras de Negócio
