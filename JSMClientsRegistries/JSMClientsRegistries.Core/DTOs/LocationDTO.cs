@@ -1,23 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class LocationDTO
     {
-        [StringLength(255)]
+        [JsonProperty("street")]
         public string Street { get; set; }
 
-        [StringLength(50)]
+
+        [JsonProperty("city")]
         public string City { get; set; }
 
-        [StringLength(50)]
+
+        [JsonProperty("state")]
         public string State { get; set; }
 
+
+        [JsonProperty("postcode")]
         public int Postcode { get; set; }
 
-
+        [JsonProperty("coordinates")]
         public CoordinatesDTO Coordinates { get; set; }
+
+
+        [JsonProperty("timezone")]
         public TimezoneDTO Timezone { get; set; }
-        public ClientDTO Client { get; set; }
     }
 }

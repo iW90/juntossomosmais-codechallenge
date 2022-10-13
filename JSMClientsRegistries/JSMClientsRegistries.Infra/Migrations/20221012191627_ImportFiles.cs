@@ -1,11 +1,9 @@
 ﻿using JSMClientsRegistries.Core.DTOs;
 using JSMClientsRegistries.Core.Enums;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System;
 
 namespace JSMClientsRegistries.Infra.Migrations
 {
@@ -15,14 +13,14 @@ namespace JSMClientsRegistries.Infra.Migrations
         {
             var clientList = DeserializeClientListJson();
             int i = 0;
-            foreach (var client in clientList)
+            foreach (var client in clientList.Results)
             {
                 i++;
                 var type = GetType(client.Location.Coordinates.Latitude, client.Location.Coordinates.Longitude);
                 var region = GetRegion(client.Location.State);
                 var gender = FormatGender(client.Gender);
                 var phone = FormatNumberToE164(client.Phone);
-                var cel = FormatNumberToE164(client.Cel);
+                var cel = FormatNumberToE164(client.Cell);
                 migrationBuilder.Sql($"INSERT INTO Pictures (Id, Large, Medium, Thumbnail) VALUES ('{i}', '{client.Pictures.Large}', '{client.Pictures.Medium}', '{client.Pictures.Thumbnail}');");
                 migrationBuilder.Sql($"INSERT INTO Location (Id, Region, Street, City, State, Postcode, Latitude, Longitude, TimezoneOffset, TimezoneDescription) VALUES ('{i}', '{region}', '{client.Location.Street}', '{client.Location.City}', '{client.Location.State}', '{client.Location.Postcode}', '{client.Location.Coordinates.Latitude}', '{client.Location.Coordinates.Longitude}', '{client.Location.Timezone.Offset}', '{client.Location.Timezone.Description}');");
                 migrationBuilder.Sql($"INSERT INTO Clients (Id, Type, Gender, TitleName, FirstName, LastName, Email, DobDate, RegisteredDate, Phone, Cel, IdLocation, IdPictures) VALUES ('{i}', '{type}', '{gender}', '{client.Name.Title}', '{client.Name.First}', '{client.Name.Last}', '{client.Email}', '{client.Dob.Date}', '{client.Registered.Date}', '{phone}', '{cel}', '{i}', '{i}');");
@@ -30,14 +28,14 @@ namespace JSMClientsRegistries.Infra.Migrations
         }
 
         //Import JSON file
-        private List<ClientDTO> DeserializeClientListJson()
+        private ResultDTO DeserializeClientListJson()
         {
-            List<ClientDTO> clients = null;
+            ResultDTO clients = new ResultDTO();
 
             using (StreamReader stream = new StreamReader(@"..\Files\input-backend.json"))
             {
                 string jsonFile = stream.ReadToEnd();
-                clients = JsonSerializer.Deserialize<List<ClientDTO>>(jsonFile);
+                clients = JsonSerializer.Deserialize<ResultDTO>(jsonFile);
             }
             return clients;
         }

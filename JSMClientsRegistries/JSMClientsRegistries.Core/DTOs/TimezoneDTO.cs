@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class TimezoneDTO
     {
-        [StringLength(6)]
+        [JsonProperty("offset")]
         public string Offset { get; set; }
 
-        [StringLength(255)]
+        [JsonProperty("description")]
         public string Description { get; set; }
-        public LocationDTO Location { get; set; }
     }
 }

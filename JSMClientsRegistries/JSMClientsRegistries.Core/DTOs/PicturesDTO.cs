@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class PicturesDTO
     {
-
-        [StringLength(255)]
+        [JsonProperty("large")]
         public string Large { get; set; }
+        [JsonProperty("medium")]
 
-        [StringLength(255)]
+
         public string Medium { get; set; }
+        [JsonProperty("thumbnail")]
 
-        [StringLength(255)]
+
         public string Thumbnail { get; set; }
-
-        public ClientDTO Client { get; set; }
     }
 }
