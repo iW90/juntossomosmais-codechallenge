@@ -19,7 +19,7 @@ namespace JSMClientsRegistries.Application.Mappings
                 .ForMember(dest => dest.Birthday, fonte => fonte.MapFrom(src => src.DobDate))
                 .ForMember(dest => dest.Registered, fonte => fonte.MapFrom(src => src.RegisteredDate))
                 .ForMember(dest => dest.TelephoneNumbers, fonte => fonte.MapFrom(src => new List<string>() { src.Phone }))
-                .ForMember(dest => dest.MobileNumbers, fonte => fonte.MapFrom(src => new List<string>() { src.Cel }))
+                .ForMember(dest => dest.MobileNumbers, fonte => fonte.MapFrom(src => new List<string>() { src.Cell }))
                 .ForMember(dest => dest.Nationality, fonte => fonte.MapFrom(src => src.Nationality));
 
             CreateMap<Location, LocationResponse>()
@@ -33,7 +33,7 @@ namespace JSMClientsRegistries.Application.Mappings
                 .ForPath(dest => dest.Timezone.Offset, fonte => fonte.MapFrom(src => src.TimezoneOffset))
                 .ForPath(dest => dest.Timezone.Description, fonte => fonte.MapFrom(src => src.TimezoneDescription));
 
-            CreateMap<Pictures, PicturesResponse>()
+            CreateMap<Picture, PictureResponse>()
                 .ForMember(dest => dest.Large, fonte => fonte.MapFrom(src => src.Large))
                 .ForMember(dest => dest.Medium, fonte => fonte.MapFrom(src => src.Medium))
                 .ForMember(dest => dest.Thumbnail, fonte => fonte.MapFrom(src => src.Thumbnail));

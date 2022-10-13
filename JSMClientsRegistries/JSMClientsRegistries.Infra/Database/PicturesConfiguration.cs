@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JSMClientsRegistries.Infra.Database
 {
-    public class PicturesConfiguration : IEntityTypeConfiguration<Pictures>
+    public class PicturesConfiguration : IEntityTypeConfiguration<Picture>
     {
-        public void Configure(EntityTypeBuilder<Pictures> builder)
+        public void Configure(EntityTypeBuilder<Picture> builder)
         {
             builder.ToTable("Pictures");
 

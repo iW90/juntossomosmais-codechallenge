@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using JSMClientsRegistries.Application.Models.Requests;
 using JSMClientsRegistries.Application.Models.Responses;
-using JSMClientsRegistries.Core.Enums;
 using JSMClientsRegistries.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

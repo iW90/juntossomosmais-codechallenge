@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace JSMClientsRegistries.Infra.Migrations
 {
@@ -8,24 +7,24 @@ namespace JSMClientsRegistries.Infra.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Locations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Region = table.Column<int>(type: "INTEGER", nullable: false),
+                    Region = table.Column<int>(type: "INT", nullable: false),
                     Street = table.Column<string>(type: "VARCHAR(255)", nullable: true),
                     City = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     State = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     Postcode = table.Column<int>(type: "INT", nullable: false),
-                    Latitude = table.Column<decimal>(type: "CHAR(11)", nullable: false),
-                    Longitude = table.Column<decimal>(type: "CHAR(11)", nullable: false),
+                    Latitude = table.Column<string>(type: "CHAR(11)", nullable: true),
+                    Longitude = table.Column<string>(type: "CHAR(11)", nullable: true),
                     TimezoneOffset = table.Column<string>(type: "CHAR(6)", nullable: true),
                     TimezoneDescription = table.Column<string>(type: "VARCHAR(255)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.Id);
+                    table.PrimaryKey("PK_Locations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,36 +43,36 @@ namespace JSMClientsRegistries.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Client",
+                name: "Clients",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<int>(type: "INT", nullable: false),
                     Gender = table.Column<string>(type: "CHAR(1)", nullable: true),
                     TitleName = table.Column<string>(type: "VARCHAR(10)", nullable: true),
                     FirstName = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     LastName = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     Email = table.Column<string>(type: "VARCHAR(100)", nullable: true),
-                    DobDate = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    RegisteredDate = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    DobDate = table.Column<string>(type: "VARCHAR(255)", nullable: true),
+                    RegisteredDate = table.Column<string>(type: "VARCHAR(255)", nullable: true),
                     Phone = table.Column<string>(type: "CHAR(20)", nullable: true),
-                    Cel = table.Column<string>(type: "CHAR(20)", nullable: true),
+                    Cell = table.Column<string>(type: "CHAR(20)", nullable: true),
                     Nationality = table.Column<string>(type: "CHAR(2)", nullable: true, defaultValue: "BR"),
                     IdLocation = table.Column<int>(type: "INTEGER", nullable: false),
                     IdPicture = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Client", x => x.Id);
+                    table.PrimaryKey("PK_Clients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Client_Location_IdLocation",
+                        name: "FK_Clients_Locations_IdLocation",
                         column: x => x.IdLocation,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Client_Pictures_IdPicture",
+                        name: "FK_Clients_Pictures_IdPicture",
                         column: x => x.IdPicture,
                         principalTable: "Pictures",
                         principalColumn: "Id",
@@ -81,14 +80,14 @@ namespace JSMClientsRegistries.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Client_IdLocation",
-                table: "Client",
+                name: "IX_Clients_IdLocation",
+                table: "Clients",
                 column: "IdLocation",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Client_IdPicture",
-                table: "Client",
+                name: "IX_Clients_IdPicture",
+                table: "Clients",
                 column: "IdPicture",
                 unique: true);
         }
@@ -96,10 +95,10 @@ namespace JSMClientsRegistries.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Client");
+                name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "Pictures");

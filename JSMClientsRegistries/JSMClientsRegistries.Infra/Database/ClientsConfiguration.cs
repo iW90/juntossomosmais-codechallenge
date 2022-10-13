@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JSMClientsRegistries.Infra.Database
 {
-    public class ClientConfiguration : IEntityTypeConfiguration<Client>
+    public class ClientsConfiguration : IEntityTypeConfiguration<Client>
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            builder.ToTable("Client");
+            builder.ToTable("Clients");
 
             builder.HasKey(pk => pk.Id);
 
@@ -25,12 +25,12 @@ namespace JSMClientsRegistries.Infra.Database
             builder.Property(p => p.Email)
                 .HasColumnType("VARCHAR(100)");
             builder.Property(p => p.DobDate)
-                .HasColumnType("DATETIME");
+                .HasColumnType("VARCHAR(255)");
             builder.Property(p => p.RegisteredDate)
-                .HasColumnType("DATETIME");
+                .HasColumnType("VARCHAR(255)");
             builder.Property(p => p.Phone)
                 .HasColumnType("CHAR(20)");
-            builder.Property(p => p.Cel)
+            builder.Property(p => p.Cell)
                 .HasColumnType("CHAR(20)");
             builder.Property(p => p.Nationality)
                 .HasColumnType("CHAR(2)")
@@ -41,7 +41,7 @@ namespace JSMClientsRegistries.Infra.Database
                 .HasForeignKey<Client>(fk => fk.IdLocation)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(fk => fk.Pictures)
+            builder.HasOne(fk => fk.Picture)
                 .WithOne(fk => fk.Client)
                 .HasForeignKey<Client>(fk => fk.IdPicture)
                 .OnDelete(DeleteBehavior.Restrict);

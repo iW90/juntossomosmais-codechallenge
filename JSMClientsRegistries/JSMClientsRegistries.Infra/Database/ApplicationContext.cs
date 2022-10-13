@@ -5,9 +5,9 @@ namespace JSMClientsRegistries.Infra.Database
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Client> Client { get; set; }
-        public DbSet<Location> Location { get; set; }
-        public DbSet<Pictures> Pictures { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -15,8 +15,8 @@ namespace JSMClientsRegistries.Infra.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ClientConfiguration());
-            modelBuilder.ApplyConfiguration(new LocationConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientsConfiguration());
+            modelBuilder.ApplyConfiguration(new LocationsConfiguration());
             modelBuilder.ApplyConfiguration(new PicturesConfiguration());
         }
     }

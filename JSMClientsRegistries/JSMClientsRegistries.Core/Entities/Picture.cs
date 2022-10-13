@@ -1,6 +1,6 @@
 ﻿namespace JSMClientsRegistries.Core.Entities
 {
-    public class Pictures
+    public class Picture
     {
         public int Id { get; private set; }
         public string Large { get; private set; }

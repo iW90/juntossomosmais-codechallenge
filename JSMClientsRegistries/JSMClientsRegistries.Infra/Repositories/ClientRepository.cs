@@ -22,9 +22,9 @@ namespace JSMClientsRegistries.Infra.Repositories
         {
 
             return await _context
-                .Client
+                .Clients
                     .Include(x => x.Location)
-                    .Include(x => x.Pictures)
+                    .Include(x => x.Picture)
                 .Where(x => x.Type == type)
                 .Where(x => x.Location.Region == region)
                 .AsNoTracking()

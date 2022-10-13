@@ -1,15 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System.Text.Json.Serialization;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class RegisteredDTO
     {
-        [JsonProperty("date")]
-        public DateTime Date { get; set; }
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
 
 
-        [JsonProperty("age")]
+        [JsonPropertyName("age")]
         public int Age { get; set; }
     }
 }

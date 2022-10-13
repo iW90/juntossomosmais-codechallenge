@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JSMClientsRegistries.Infra.Database
 {
-    public class LocationConfiguration : IEntityTypeConfiguration<Location>
+    public class LocationsConfiguration : IEntityTypeConfiguration<Location>
     {
         public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.ToTable("Location");
+            builder.ToTable("Locations");
 
             builder.HasKey(pk => pk.Id);
 

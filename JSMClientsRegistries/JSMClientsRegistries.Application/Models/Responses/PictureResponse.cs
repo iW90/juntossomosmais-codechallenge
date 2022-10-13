@@ -1,6 +1,6 @@
 ﻿namespace JSMClientsRegistries.Application.Models.Responses
 {
-    public class PicturesResponse
+    public class PictureResponse
     {
         public string Large { get; set; }
         public string Medium { get; set; }

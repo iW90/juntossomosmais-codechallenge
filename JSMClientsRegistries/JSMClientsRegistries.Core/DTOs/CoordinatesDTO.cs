@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class CoordinatesDTO
     {
-        [JsonProperty("latitude")]
+        [JsonPropertyName("latitude")]
         public string Latitude { get; set; }
 
-        [JsonProperty("longitude")]
+
+        [JsonPropertyName("longitude")]
         public string Longitude { get; set; }
     }
 }

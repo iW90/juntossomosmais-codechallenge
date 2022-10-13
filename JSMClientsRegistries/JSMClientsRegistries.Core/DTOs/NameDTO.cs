@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class NameDTO
     {
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
-        [JsonProperty("first")]
+
+        [JsonPropertyName("first")]
         public string First { get; set; }
 
-        [JsonProperty("last")]
+
+        [JsonPropertyName("last")]
         public string Last { get; set; }
     }
 }

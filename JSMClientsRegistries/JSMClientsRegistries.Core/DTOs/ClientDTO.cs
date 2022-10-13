@@ -1,43 +1,42 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Text.Json.Serialization;
 
 namespace JSMClientsRegistries.Core.DTOs
 {
     public class ClientDTO
     {
-        [JsonProperty("gender")]
+        [JsonPropertyName("gender")]
         public string Gender { get; set; }
 
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public NameDTO Name { get; set; }
 
 
-        [JsonProperty("location")]
+        [JsonPropertyName("location")]
         public LocationDTO Location { get; set; }
 
 
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
 
 
-        [JsonProperty("dob")]
+        [JsonPropertyName("dob")]
         public DobDTO Dob { get; set; }
 
 
-        [JsonProperty("registered")]
+        [JsonPropertyName("registered")]
         public RegisteredDTO Registered { get; set; }
 
 
-        [JsonProperty("phone")]
+        [JsonPropertyName("phone")]
         public string Phone { get; set; }
 
 
-        [JsonProperty("cell")]
+        [JsonPropertyName("cell")]
         public string Cell { get; set; }
 
 
-        [JsonProperty("pictures")]
-        public PicturesDTO Pictures { get; set; }
+        [JsonPropertyName("picture")]
+        public PictureDTO Picture { get; set; }
     }
 }
