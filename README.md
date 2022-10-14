@@ -12,9 +12,7 @@ Procura e retorna uma lista de elegíveis de acordo com o tipo e a região infor
 
 ## Upload de Arquivos JSON
 
-Upload automático para o banco de dados ao executar a API.
-
-> Funcionalidade "in memory" não implementada.
+Upload automático para o banco de dados (SQLite) ao executar a API.
 
 
 ## Regras de Negócio

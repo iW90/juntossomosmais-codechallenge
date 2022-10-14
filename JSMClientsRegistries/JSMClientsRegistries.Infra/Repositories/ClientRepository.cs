@@ -20,7 +20,6 @@ namespace JSMClientsRegistries.Infra.Repositories
 
         public async Task<IEnumerable<Client>> ElegibleList(ClientRegionEnum region, ClientTypeEnum type)
         {
-
             return await _context
                 .Clients
                     .Include(x => x.Location)

@@ -13,7 +13,8 @@ namespace JSMClientsRegistries.Infra.Database
             builder.HasKey(pk => pk.Id);
 
             builder.Property(p => p.Region)
-                .HasColumnType("INT");
+                .HasColumnType("VARCHAR(20)")
+                .HasConversion<string>();
             builder.Property(p => p.Street)
                 .HasColumnType("VARCHAR(255)");
             builder.Property(p => p.City)

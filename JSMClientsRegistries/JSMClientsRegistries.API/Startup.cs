@@ -37,6 +37,7 @@ namespace JSMClientsRegistries.API
             services.AddDbContext<ApplicationContext>(options =>
                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+               .EnableSensitiveDataLogging()
             );
 
 
@@ -48,6 +49,7 @@ namespace JSMClientsRegistries.API
 
             services.AddControllers().AddJsonOptions(options =>
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
