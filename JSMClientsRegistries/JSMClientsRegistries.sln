@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSMClientsRegistries.API", "JSMClientsRegistries.API\JSMClientsRegistries.API.csproj", "{4E95E5DA-E0CB-4AF9-87A1-BCFA6245C918}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSMClientsRegistries.API", "JSMClientsRegistries.API\JSMClientsRegistries.API.csproj", "{4E95E5DA-E0CB-4AF9-87A1-BCFA6245C918}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSMClientsRegistries.Infra", "JSMClientsRegistries.Infra\JSMClientsRegistries.Infra.csproj", "{7393591D-B51E-42BD-BCFD-13B2B7B75BD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSMClientsRegistries.Infra", "JSMClientsRegistries.Infra\JSMClientsRegistries.Infra.csproj", "{7393591D-B51E-42BD-BCFD-13B2B7B75BD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSMClientsRegistries.Core", "JSMClientsRegistries.Core\JSMClientsRegistries.Core.csproj", "{67A85E1F-1B8A-4544-94D6-8C2D03845B1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSMClientsRegistries.Core", "JSMClientsRegistries.Core\JSMClientsRegistries.Core.csproj", "{67A85E1F-1B8A-4544-94D6-8C2D03845B1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSMClientsRegistries.Application", "JSMClientsRegistries.Application\JSMClientsRegistries.Application.csproj", "{269AB0F8-492C-438A-9210-83029BCA68B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSMClientsRegistries.Application", "JSMClientsRegistries.Application\JSMClientsRegistries.Application.csproj", "{269AB0F8-492C-438A-9210-83029BCA68B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSMClientsRegistries.Tests", "JSMClientsRegistries.Tests\JSMClientsRegistries.Tests.csproj", "{EFECA8E0-6141-426C-8A3B-12A2BF859952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{269AB0F8-492C-438A-9210-83029BCA68B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{269AB0F8-492C-438A-9210-83029BCA68B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{269AB0F8-492C-438A-9210-83029BCA68B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFECA8E0-6141-426C-8A3B-12A2BF859952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFECA8E0-6141-426C-8A3B-12A2BF859952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFECA8E0-6141-426C-8A3B-12A2BF859952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFECA8E0-6141-426C-8A3B-12A2BF859952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

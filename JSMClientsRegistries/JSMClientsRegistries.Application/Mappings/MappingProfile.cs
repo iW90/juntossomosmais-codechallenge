@@ -1,4 +1,5 @@
 ﻿using JSMClientsRegistries.Application.Models.Responses;
+using JSMClientsRegistries.Application.Models.Requests;
 using JSMClientsRegistries.Core.Entities;
 using System.Collections.Generic;
 using AutoMapper;
@@ -9,6 +10,10 @@ namespace JSMClientsRegistries.Application.Mappings
     {
         public MappingProfile()
         {
+            CreateMap<ElegibleListRequest, Client>()
+                .ForMember(dest => dest.Type, fonte => fonte.MapFrom(src => src.Type))
+                .ForPath(dest => dest.Location.Region, fonte => fonte.MapFrom(src => src.Region));
+
             CreateMap<Client, ClientResponse>()
                 .ForMember(dest => dest.Type, fonte => fonte.MapFrom(src => src.Type))
                 .ForMember(dest => dest.Gender, fonte => fonte.MapFrom(src => src.Gender))
