@@ -12,7 +12,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Region = table.Column<int>(type: "INT", nullable: false),
+                    Region = table.Column<int>(type: "VARCHAR(20)", nullable: false),
                     Street = table.Column<string>(type: "VARCHAR(255)", nullable: true),
                     City = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     State = table.Column<string>(type: "VARCHAR(50)", nullable: true),
@@ -48,7 +48,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<int>(type: "INT", nullable: false),
+                    Type = table.Column<int>(type: "VARCHAR(10)", nullable: false),
                     Gender = table.Column<string>(type: "CHAR(1)", nullable: true),
                     TitleName = table.Column<string>(type: "VARCHAR(10)", nullable: true),
                     FirstName = table.Column<string>(type: "VARCHAR(50)", nullable: true),

@@ -18,9 +18,11 @@ namespace JSMClientsRegistries.API.Controllers
         }
 
         [HttpGet("ElegibleList")]
-        public async Task<IActionResult> Get([FromQuery] ElegibleListRequest request)
+        public async Task<IActionResult> Get([FromQuery] ElegibleListRequest request, int pageNumber, int pageSize)
         {
-            return await _elegibleListAsync.ExecuteAsync(request);
+            if (pageNumber <= 0 || pageSize <= 0)
+                return BadRequest("pageNumber or pageSize must be must be greater than zero");
+            return await _elegibleListAsync.ExecuteAsync(request, pageNumber, pageSize);
         }
     }
 }

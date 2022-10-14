@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JSMClientsRegistries.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221013210756_Input")]
-    partial class Input
+    [Migration("20221014170224_ClientRegistries")]
+    partial class ClientRegistries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,7 +62,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INT");
+                        .HasColumnType("VARCHAR(10)");
 
                     b.HasKey("Id");
 
@@ -94,7 +94,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                         .HasColumnType("INT");
 
                     b.Property<int>("Region")
-                        .HasColumnType("INT");
+                        .HasColumnType("VARCHAR(20)");
 
                     b.Property<string>("State")
                         .HasColumnType("VARCHAR(50)");

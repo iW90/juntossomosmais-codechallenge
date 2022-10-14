@@ -20,16 +20,22 @@ namespace JSMClientsRegistries.Application.UseCases
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> ExecuteAsync(ElegibleListRequest request)
+        public async Task<IActionResult> ExecuteAsync(ElegibleListRequest request, int pageNumber, int pageSize)
         {
             if (request == null)
                 return new BadRequestResult();
 
-            var clients = await _repository.ElegibleList(request.Region, request.Type);
+            var clients = await _repository.ElegibleList(request.Region, request.Type, pageNumber, pageSize);
 
-            var response = _mapper.Map<List<ClientResponse>>(clients);
+            PaginationResponse pagination = new()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = await _repository.CountElegibleList(request.Region, request.Type),
+                Users = _mapper.Map<List<ClientResponse>>(clients)
+            };
 
-            return new OkObjectResult(response);
+            return new OkObjectResult(pagination);
         }
     }
 }

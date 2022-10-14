@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace JSMClientsRegistries.Infra.Migrations
 {
-    public partial class Input : Migration
+    public partial class Inputs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,13 +26,12 @@ namespace JSMClientsRegistries.Infra.Migrations
                 migrationBuilder.Sql($"INSERT INTO Clients (Id, Type, Gender, TitleName, FirstName, LastName, Email, DobDate, RegisteredDate, Phone, Cell, IdLocation, IdPicture) VALUES ('{i}', '{type}', '{gender}', '{client.Name.Title}', '{client.Name.First}', '{client.Name.Last}', '{client.Email}', '{client.Dob.Date}', '{client.Registered.Date}', '{phone}', '{cel}', '{i}', '{i}');");
             }
         }
-
         //Import JSON file
         private ResultsDTO DeserializeClientListJson()
         {
             ResultsDTO clients = new ResultsDTO();
 
-            using (StreamReader stream = new StreamReader(@"..\Files\input-backend.json"))
+            using (StreamReader stream = new StreamReader(@"..\JSMClientsRegistries.Files\input-backend.json"))
             {
                 string jsonFile = stream.ReadToEnd();
                 clients = JsonSerializer.Deserialize<ResultsDTO>(jsonFile);
@@ -45,7 +44,7 @@ namespace JSMClientsRegistries.Infra.Migrations
         private List<Client> DeserializeClientListCsv()
         {
             List<Client> clients = null;
-            var reader = new StreamReader(File.OpenRead(@"..\Files\input-backend.csv"));
+            var reader = new StreamReader(File.OpenRead(@"..\JSMClientsRegistries.Files\input-backend.csv"));
             List<string> clientList = new List<string>();
             while (!reader.EndOfStream)
             {
@@ -82,17 +81,17 @@ namespace JSMClientsRegistries.Infra.Migrations
             int i = 0;
 
             //Special Area 001
-            special[i, 0] = -15.411580m;
-            special[i, 1] = -02.196998m;
-            special[i, 2] = -46.361899m;
-            special[i, 3] = -34.276938m;
+            special[i, 0] = -46.361899m;
+            special[i, 1] = -34.276938m;
+            special[i, 2] = -15.411580m;
+            special[i, 3] = -02.196998m;
             i++;
 
             //Special Area 002
-            special[i, 0] = -23.966413m;
-            special[i, 1] = -19.766959m;
-            special[i, 2] = -52.997614m;
-            special[i, 3] = -44.428305m;
+            special[i, 0] = -52.997614m;
+            special[i, 1] = -44.428305m;
+            special[i, 2] = -23.966413m;
+            special[i, 3] = -19.766959m;
             i++;
             #endregion
 
@@ -120,10 +119,10 @@ namespace JSMClientsRegistries.Infra.Migrations
             i = 0;
 
             //Normal Area 001
-            normal[i, 0] = -34.016466m;
-            normal[i, 1] = -26.155681m;
-            normal[i, 2] = -54.777426m;
-            normal[i, 3] = -46.603598m;
+            normal[i, 0] = -54.777426m;
+            normal[i, 1] = -46.603598m;
+            normal[i, 2] = -34.016466m;
+            normal[i, 3] = -26.155681m;
             i++;
             #endregion
 
@@ -200,5 +199,7 @@ namespace JSMClientsRegistries.Infra.Migrations
         {
 
         }*/
+
+
     }
 }

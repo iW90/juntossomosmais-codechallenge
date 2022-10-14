@@ -18,7 +18,18 @@ namespace JSMClientsRegistries.Infra.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Client>> ElegibleList(ClientRegionEnum region, ClientTypeEnum type)
+        public async Task<int> CountElegibleList(ClientRegionEnum region, ClientTypeEnum type)
+        {
+            return await _context
+                .Clients
+                    .Include(x => x.Location)
+                .Where(x => x.Type == type)
+                .Where(x => x.Location.Region == region)
+                .AsNoTracking()
+                .CountAsync();
+        }
+
+        public async Task<IEnumerable<Client>> ElegibleList(ClientRegionEnum region, ClientTypeEnum type, int pageNumber, int pageSize)
         {
             return await _context
                 .Clients
@@ -27,6 +38,9 @@ namespace JSMClientsRegistries.Infra.Repositories
                 .Where(x => x.Type == type)
                 .Where(x => x.Location.Region == region)
                 .AsNoTracking()
+                //.OrderBy(x => x.Nationality)
+                .Skip(pageNumber - 1)
+                .Take(pageSize)
                 .ToListAsync();
         }
     }

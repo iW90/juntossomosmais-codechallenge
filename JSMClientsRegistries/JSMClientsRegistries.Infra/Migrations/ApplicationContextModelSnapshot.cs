@@ -60,7 +60,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                         .HasColumnType("VARCHAR(10)");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INT");
+                        .HasColumnType("VARCHAR(10)");
 
                     b.HasKey("Id");
 
@@ -92,7 +92,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                         .HasColumnType("INT");
 
                     b.Property<int>("Region")
-                        .HasColumnType("INT");
+                        .HasColumnType("VARCHAR(20)");
 
                     b.Property<string>("State")
                         .HasColumnType("VARCHAR(50)");
