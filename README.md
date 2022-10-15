@@ -30,12 +30,15 @@ Contempla:
 
 Upload de dados automático para o banco de dados (SQLite) ao executar a API, sendo gerada a database `JSMClientsRegistries.db`.
 
-É necessário escolher o método em `JSMClientsRegistries.Infra > Migrations > 20221014170337_Inputs.cs` para definir se o upload será feito do arquivo CSV ou do JSON, bastando comentar o método que não for utilizado:
+1. É necessário escolher o método em `JSMClientsRegistries.Infra > Migrations > 20221014170337_Inputs.cs` para definir se o upload será feito do arquivo CSV ou do JSON, bastando comentar o método que não for utilizado:
 
 ```csharp
 var clientList = DeserializeClientListCsv();
 //var clientList = DeserializeClientListJson();
 ```
+
+2. Os arquivos devem ser colocados na pasta `JSMClientsRegistries.Files` e possuir o nome `input-backend.json` ou `input-backend.csv`. Se necessário, basta alterar o nome ou caminho em `JSMClientsRegistries.Infra > Migrations > 20221014170337_Inputs.cs`.
+
 
 ### Desabilitar upload automático
 
