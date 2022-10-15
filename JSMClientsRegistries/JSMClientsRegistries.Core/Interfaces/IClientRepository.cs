@@ -9,5 +9,7 @@ namespace JSMClientsRegistries.Core.Interfaces
     {
         Task<IEnumerable<Client>> ElegibleList(ClientRegionEnum region, ClientTypeEnum type, int pageNumber, int pageSize);
         Task<int> CountElegibleList(ClientRegionEnum region, ClientTypeEnum type);
+
+        Task<Client> LastId();
     }
 }

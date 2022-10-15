@@ -1,18 +1,49 @@
 # DESAFIO TÉCNICO: JUNTOS SOMOS +
 
-A aplicação `jsmclients` foi desenvolvida para armazenar os pacotes de dados enviados e também permite a busca por clientes elegíveis.
+Desafio feito para o [code-challenge](https://github.com/juntossomosmais/code-challenge) da **Juntos Somos +**.
+
+
+### Descrição
+
+A aplicação `JSMClientsRegistries` foi desenvolvida para armazenar os pacotes de dados enviados e também permite a busca por clientes elegíveis.
+
+Contempla:
+
+- Upload de arquivos JSON e CSV para a database em SQLite.
+- Busca paginada por lista de clientes de acordo com região e tipo informados.
 
 
 ## Endpoint
 
-- `GET/api/Client/ElegibleList`
+```
+    GET/api/Client/ElegibleList
+```
 
-Procura e retorna uma lista de elegíveis de acordo com o tipo e a região informadas:
+É necessário informar:
+ - região (norte, nordeste, sul, sudeste ou centro-oeste);
+ - tipo (normal, special ou laborious);
+ - quantidade de resultados que deseja por página;
+ - número da página que deseja acessar.
 
 
-## Upload de Arquivos JSON
+## Upload de Arquivos
 
-Upload automático para o banco de dados (SQLite) ao executar a API.
+Upload de dados automático para o banco de dados (SQLite) ao executar a API, sendo gerada a database `JSMClientsRegistries.db`.
+
+É necessário escolher o método em `JSMClientsRegistries.Infra > Migrations > 20221014170337_Inputs.cs` para definir se o upload será feito do arquivo CSV ou do JSON, bastando comentar o método que não for utilizado:
+
+```csharp
+var clientList = DeserializeClientListCsv();
+//var clientList = DeserializeClientListJson();
+```
+
+### Desabilitar upload automático
+
+Para desabilitar o upload automático, basta ir em `JSMClientsRegistries.API > Startup.cs` e comentar o comando:
+
+```csharp
+//context.Database.Migrate();
+```
 
 
 ## Regras de Negócio
@@ -79,4 +110,5 @@ Upload automático para o banco de dados (SQLite) ao executar a API.
 - ASP.NET Core 5.0
 - SQLite
 - Entity Framework Core
+- AutoMapper
 - Swagger

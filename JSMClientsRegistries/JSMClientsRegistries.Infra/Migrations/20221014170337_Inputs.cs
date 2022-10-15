@@ -1,6 +1,8 @@
 ﻿using JSMClientsRegistries.Core.DTOs;
 using JSMClientsRegistries.Core.Enums;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -11,7 +13,8 @@ namespace JSMClientsRegistries.Infra.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var clientList = DeserializeClientListJson();
+            var clientList = DeserializeClientListCsv();
+            //var clientList = DeserializeClientListJson();
             int i = 0;
             foreach (var client in clientList.Results)
             {
@@ -21,6 +24,7 @@ namespace JSMClientsRegistries.Infra.Migrations
                 var gender = FormatGender(client.Gender);
                 var phone = FormatNumberToE164(client.Phone);
                 var cel = FormatNumberToE164(client.Cell);
+
                 migrationBuilder.Sql($"INSERT INTO Pictures (Id, Large, Medium, Thumbnail) VALUES ('{i}', '{client.Picture.Large}', '{client.Picture.Medium}', '{client.Picture.Thumbnail}');");
                 migrationBuilder.Sql($"INSERT INTO Locations (Id, Region, Street, City, State, Postcode, Latitude, Longitude, TimezoneOffset, TimezoneDescription) VALUES ('{i}', '{region}', '{client.Location.Street}', '{client.Location.City}', '{client.Location.State}', '{client.Location.Postcode}', '{client.Location.Coordinates.Latitude}', '{client.Location.Coordinates.Longitude}', '{client.Location.Timezone.Offset}', '{client.Location.Timezone.Description}');");
                 migrationBuilder.Sql($"INSERT INTO Clients (Id, Type, Gender, TitleName, FirstName, LastName, Email, DobDate, RegisteredDate, Phone, Cell, IdLocation, IdPicture) VALUES ('{i}', '{type}', '{gender}', '{client.Name.Title}', '{client.Name.First}', '{client.Name.Last}', '{client.Email}', '{client.Dob.Date}', '{client.Registered.Date}', '{phone}', '{cel}', '{i}', '{i}');");
@@ -29,7 +33,7 @@ namespace JSMClientsRegistries.Infra.Migrations
         //Import JSON file
         private ResultsDTO DeserializeClientListJson()
         {
-            ResultsDTO clients = new ResultsDTO();
+            ResultsDTO clients = new();
 
             using (StreamReader stream = new StreamReader(@"..\JSMClientsRegistries.Files\input-backend.json"))
             {
@@ -39,26 +43,76 @@ namespace JSMClientsRegistries.Infra.Migrations
             return clients;
         }
 
-        /*
+
         //Import CSV file
-        private List<Client> DeserializeClientListCsv()
+        private ResultsDTO DeserializeClientListCsv()
         {
-            List<Client> clients = null;
-            var reader = new StreamReader(File.OpenRead(@"..\JSMClientsRegistries.Files\input-backend.csv"));
-            List<string> clientList = new List<string>();
-            while (!reader.EndOfStream)
+            string[] csvLines = File.ReadAllLines(@"..\JSMClientsRegistries.Files\input-backend.csv");
+            
+            var clients = new List<ClientDTO>();
+
+            for (int i = 1; i < csvLines.Length; i++)
             {
-                var line = reader.ReadLine();
-                var values = line.Split(',');
-                clientList.Add(values[0]);
-                foreach (var column in clientList)
+                var removequotes = csvLines[i].Replace("\"", "");
+                var temp = removequotes.Replace(", ", "|");
+                string[] csvData = temp.Split(",");
+
+                clients.Add(new ClientDTO()
                 {
-                    Console.WriteLine(column);
-                }
+                    Gender = csvData[0],
+                    Name = new NameDTO()
+                    {
+                        Title = csvData[1],
+                        First = csvData[2],
+                        Last = csvData[3]
+                    },
+                    Location = new LocationDTO()
+                    {
+                        Street = csvData[4],
+                        City = csvData[5],
+                        State = csvData[6],
+                        Postcode = Int32.Parse(csvData[7]),
+                        Coordinates = new CoordinatesDTO()
+                        {
+                            Latitude = csvData[8],
+                            Longitude = csvData[9]
+                        },
+                        Timezone = new TimezoneDTO()
+                        {
+                            Offset = csvData[10],
+                            Description = csvData[11].Replace("|", ", ")
+                        }
+                    },
+                    Email = csvData[12],
+                    Dob = new DobDTO()
+                    {
+                        Date = csvData[13],
+                        Age = Int32.Parse(csvData[14])
+                    },
+                    Registered = new RegisteredDTO()
+                    {
+                        Date = csvData[15],
+                        Age = Int32.Parse(csvData[16])
+                    },
+                    Phone = csvData[17],
+                    Cell = csvData[18],
+                    Picture = new PictureDTO()
+                    {
+                        Large = csvData[19],
+                        Medium = csvData[20],
+                        Thumbnail = csvData[21]
+                    }
+                });
             }
-            return clients;
+
+            ResultsDTO results = new ResultsDTO()
+            {
+                Results = clients
+            };
+
+            return results;
         }
-        */
+
 
         //Methods
         private ClientTypeEnum GetType(string latitude, string longitude)

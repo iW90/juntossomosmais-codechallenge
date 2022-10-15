@@ -17,6 +17,14 @@ namespace JSMClientsRegistries.Infra.Repositories
         {
             _context = context;
         }
+        
+        public async Task<Client> LastId()
+        {
+            return await _context
+                .Clients
+                    .OrderByDescending(u => u.Id)
+                    .FirstOrDefaultAsync();
+        }
 
         public async Task<int> CountElegibleList(ClientRegionEnum region, ClientTypeEnum type)
         {
